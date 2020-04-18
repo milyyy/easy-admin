@@ -24,16 +24,15 @@ app.listen(port, () => {
 
 // 连接数据库 https://developer.mozilla.org/zh-CN/docs/learn/Server-side/Express_Nodejs/mongoose
 // const uri = require("./config/milydb").mongoURI;
-const uri = 'mongodb://localhost:27017/mongoosesample';
-mongoose.connect(uri
-  ,{
-  useNewUrlParser: true,
-  useUnifiedTopology: true
-}
+const uri = 'mongodb://127.0.0.1:27017/?gssapiServiceName=mongodb';
+mongoose.connect(uri, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+  }
 )
 
 mongoose.connection.on('connected', function () { 
-  console.log('Mongoose connection open to ' + DB_URL);
+  console.log('Mongoose connection open !!!!!!!!! ');
 }); /** * 连接异常 */ 
 
 mongoose.connection.on('error',function (err) { 
