@@ -3,7 +3,7 @@ const express = require("express");
 const router = express.Router();
 const User = require("../../models/User");
 const bcrypt = require("bcrypt");
-
+const gravatar = require("gravatar");
 /**
  * $route GET /api/users/test
  * @desc 返回请求的json数据
@@ -26,11 +26,12 @@ router.post("/register", (req, res) => {
     if (user) {
       return res.status(400).json({email: "该邮箱已注册"})
     } else {
+      const avatar = gravatar.url(req.body.email, {s: '200', r: 'pg', d: 'mm'}); // 头像
       const newUser = new User({
         name: req.body.name,
         pass: req.body.pass,
         email: req.body.email,
-        // avatar
+        avatar
       })
       // bcrypt 密码加密
       bcrypt.genSalt(10, function(err, salt) {

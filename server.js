@@ -27,7 +27,8 @@ app.listen(port, () => {
 
 // 连接数据库 https://developer.mozilla.org/zh-CN/docs/learn/Server-side/Express_Nodejs/mongoose
 // const uri = require("./config/milydb").mongoURI;
-const uri = 'mongodb://127.0.0.1:27017/?gssapiServiceName=mongodb';
+// const uri = "mongodb://mily:123456@127.0.0.1:27017/?gssapiServiceName=mongodb/easy_admin";
+const uri = 'mongodb://127.0.0.1:27017/?gssap\iServiceName=mongodb';
 mongoose.connect(uri, {
     useNewUrlParser: true,
     useUnifiedTopology: true
