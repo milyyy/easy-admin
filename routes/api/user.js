@@ -16,8 +16,12 @@ router.get("/test", (req, res) => {
 })
 
 router.post("/register", (req, res) => {
-  // console.log(req.body);
-  // 在数据库(model)查询邮箱是否存在
+  /**
+   * 在数据库(model-User)查询邮箱是否存在
+   * 如果存在则抛出错误
+   * 不存在则创建新用户，并加密密码
+   * 
+  */
   User.findOne({email: req.body.email}).then( user => {
     if (user) {
       return res.status(400).json({email: "该邮箱已注册"})
