@@ -7,6 +7,7 @@ const verPass = require("./config/passport");
 const app = express();
 
 const users = require("./routes/api/user"); // suers将作为数据库表名
+const profile = require("./routes/api/profile");
 
 
 // 解析post表单请求  必须要放在路由配置之前
@@ -21,6 +22,7 @@ require("./config/passport")(passport);
 
 // 中间件
 app.use("/api/users", users);
+app.use("/api/profile", profile);
 
 // 监听端口
 const port = process.env.PORT || 5000;
