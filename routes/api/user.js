@@ -13,11 +13,7 @@ const KEYS = require("../../config/keys");
  * @desc 返回请求的json数据
  * 
  * */ 
-router.get("/test", (req, res) => {
-  res.json(
-    { msg: "login work" }
-  )
-})
+
 // 注册
 router.post("/register", (req, res) => {
   /**
@@ -28,13 +24,14 @@ router.post("/register", (req, res) => {
   */
   User.findOne({email: req.body.email}).then( user => {
     if (user) {
-      return res.status(400).json({email: "该邮箱已注册"})
+      return res.status(400).json('该邮箱已注册')
     } else {
       const avatar = gravatar.url(req.body.email, {s: '200', r: 'pg', d: 'mm'}); // 头像
       const newUser = new User({
         name: req.body.name,
         pass: req.body.pass,
         email: req.body.email,
+        identity: req.body.identity,
         avatar
       })
       // bcrypt 密码加密
@@ -58,13 +55,18 @@ router.post("/login", (req, res) => {
   const pass = req.body.pass;
   User.findOne({email}).then(user => {
     if (!user) {
-      return res.status(404).json({email: "用户不存在"})
+      return res.status(404).json("用户不存在")
     };
     // 密码匹配 验证请求密码与数据库密码是否相等
     bcrypt.compare(pass, user.pass).then(isMatch => {
       if(isMatch) {
         // jwt.sign("规则","加密名字","过期时间","箭头函数")
-        const rule = {id:user.id, email:user.email};
+        const rule = {
+          id:user.id,
+          email:user.email,
+          avatar:user.avatar,
+          identity:user.identity
+        };
         jwt.sign(rule, KEYS.secretKeys, {expiresIn: 3600*2}, (err, token)=>{
           if(err) throw err;
           return res.json({
@@ -73,7 +75,7 @@ router.post("/login", (req, res) => {
           })
         })
       } else {
-        return res.status(400).json({msg: "密码不正确"})
+        return res.status(400).json("密码不正确")
       }
     })
   })
@@ -84,7 +86,8 @@ router.get("/current", passport.authenticate('jwt', {session: false}), (req, res
   res.json({
     id: req.user.id,
     name: req.user.name,
-    email: req.user.email
+    email: req.user.email,
+    identity: req.user.identity
   })
 })
 

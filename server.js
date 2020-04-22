@@ -32,6 +32,7 @@ app.listen(port, () => {
 const uri = require("./config/keys").mongoURI;
 // const uri = "mongodb://mily:123456@127.0.0.1:27017/?gssapiServiceName=mongodb/easy_admin";
 // const uri = 'mongodb://127.0.0.1:27017/?gssap\iServiceName=mongodb';
+mongoose.set('useCreateIndex', true);
 mongoose.connect(uri, {
     useNewUrlParser: true,
     useUnifiedTopology: true
