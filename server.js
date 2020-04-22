@@ -2,20 +2,23 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
+const passport = require("passport");
+const verPass = require("./config/passport");
 const app = express();
 
 const users = require("./routes/api/user"); // suers将作为数据库表名
 
 
-
-// 路由
-app.get("/", (req, res) => {
-  res.send("hello world")
-})
-
 // 解析post表单请求  必须要放在路由配置之前
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
+// passport初始化
+app.use(passport.initialize());
+// 分离模块，给passport.js传递初始化过后的passport
+require("./config/passport")(passport);
+
+
+
 // 中间件
 app.use("/api/users", users);
 
@@ -26,7 +29,7 @@ app.listen(port, () => {
 })
 
 // 连接数据库 https://developer.mozilla.org/zh-CN/docs/learn/Server-side/Express_Nodejs/mongoose
-const uri = require("./config/milydb").mongoURI;
+const uri = require("./config/keys").mongoURI;
 // const uri = "mongodb://mily:123456@127.0.0.1:27017/?gssapiServiceName=mongodb/easy_admin";
 // const uri = 'mongodb://127.0.0.1:27017/?gssap\iServiceName=mongodb';
 mongoose.connect(uri, {
@@ -37,12 +40,11 @@ mongoose.connect(uri, {
 
 mongoose.connection.on('connected', function () { 
   console.log('Mongoose connection open !!!!!!!!! ');
-}); /** * 连接异常 */ 
+});
 
 mongoose.connection.on('error',function (err) { 
  console.log('Mongoose connection error: ' + err);
 }); 
-// 取得默认连接
 
 
 /**

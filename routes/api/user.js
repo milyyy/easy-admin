@@ -5,7 +5,9 @@ const User = require("../../models/User");
 const bcrypt = require("bcrypt");
 const gravatar = require("gravatar");
 const jwt = require('jsonwebtoken');
-const secret = require("../../config/milydb");
+const passport = require("passport");
+const KEYS = require("../../config/keys");
+
 /**
  * $route GET /api/users/test
  * @desc 返回请求的json数据
@@ -63,11 +65,11 @@ router.post("/login", (req, res) => {
       if(isMatch) {
         // jwt.sign("规则","加密名字","过期时间","箭头函数")
         const rule = {id:user.id, email:user.email};
-        jwt.sign(rule, secret.secretKeys, {expiresIn: 3600*2}, (err, token)=>{
+        jwt.sign(rule, KEYS.secretKeys, {expiresIn: 3600*2}, (err, token)=>{
           if(err) throw err;
           return res.json({
             msg: "success",
-            token: user.name + token
+            token: "Bearer " + token
           })
         })
       } else {
@@ -76,4 +78,17 @@ router.post("/login", (req, res) => {
     })
   })
 })
+
+// 验证token获取某条信息 https://www.npmjs.com/package/passport
+router.get("/current", passport.authenticate('jwt', {session: false}), (req, res)=>{
+  res.json({
+    id: req.user.id,
+    name: req.user.name,
+    email: req.user.email
+  })
+})
+
+
+
+
 module.exports = router;
