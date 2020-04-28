@@ -37,7 +37,8 @@ const uri = require("./config/keys").mongoURI;
 mongoose.set('useCreateIndex', true);
 mongoose.connect(uri, {
     useNewUrlParser: true,
-    useUnifiedTopology: true
+    useUnifiedTopology: true,
+    useFindAndModify: false
   }
 )
 
