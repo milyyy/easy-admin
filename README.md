@@ -25,4 +25,15 @@ node.js+vue全家桶搭建一个前后端连载的极简后台
     └─api             // 路由
 ├─package.json        
 ├─server.js           // 入口文件        
+``` 
+
+
+easy-admin package.json：
+```
+scripts: {
+  "client-install": "npm install --prefix client",   // 启动安装client的依赖模块
+  "client": "npm start --prefix client",    // 启动前端项目
+  "dev": "concurrently \"npm run server\" \"npm run client\"" // 前后端连载
+
+}
 ```
