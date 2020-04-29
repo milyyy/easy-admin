@@ -22,9 +22,9 @@ router.post("/register", (req, res) => {
    * 不存在则创建新用户，并加密密码
    * 
   */
-  User.findOne({email: req.body.email}).then( user => {
+  User.find({email: req.body.email, name: req.body.name}).then( user => {
     if (user) {
-      return res.status(400).json('该邮箱已注册')
+      return res.status(400).json('该用户已存在')
     } else {
       const avatar = gravatar.url(req.body.email, {s: '200', r: 'pg', d: 'mm'}); // 头像
       const newUser = new User({

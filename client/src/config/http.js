@@ -18,7 +18,7 @@ axios.interceptors.request.use(config => {
   startLoading();
   return config;
 }, err => {
-  return Promise.reject(error)
+  return Promise.reject(err)
 })
 
 axios.interceptors.response.use(res => {
@@ -26,7 +26,7 @@ axios.interceptors.response.use(res => {
   return res;
 }, err => {
   closeLoading();
-  Message.err(err.response.data);
+  Message.error(err.response.data);
   return Promise.reject(err);
 })
 

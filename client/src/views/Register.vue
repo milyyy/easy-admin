@@ -78,8 +78,8 @@ export default {
         name: "",
         email: "",
         pass: "",
+        identity: "admin",
         checkPass: "",
-        identity: "admin"
       },
       rules: {
         // 两种验证方式，一种验证器validator验证，另一种直接在rules里设置验证规则
@@ -108,7 +108,20 @@ export default {
     submitForm(formName) {
       this.$refs[formName].validate(valid => {
         if (valid) {
-          alert("submit!");
+          this.$axios.post("/api/users/register", this.ruleForm).then(res => {
+            this.$message({
+              message: "注册成功",
+              type: "success"
+            });
+            this.$router.push("/login")
+          }).catch(
+            err => {
+              this.$message({
+              message: err,
+              type: "warning"
+            });
+            }
+          )
         } else {
           console.log("error submit!!");
           return false;
