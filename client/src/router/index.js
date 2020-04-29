@@ -1,7 +1,8 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Index from '@/views/Index'
-
+import Register from '@/views/Register'
+import NotFound from '@/views/404'
 Vue.use(VueRouter)
 
 const routes = [
@@ -13,6 +14,15 @@ const routes = [
     path: '/index',
     name: 'index',
     component: Index
+  },
+  {
+    path: '/register',
+    name: 'Register',
+    component: Register
+  },
+  {
+    path: '*',
+    component: NotFound
   }
 ]
 

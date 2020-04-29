@@ -1,6 +1,6 @@
 <template>
   <div class="index">
-    index
+    <el-button>ceshi</el-button>
   </div>
 </template>
 
