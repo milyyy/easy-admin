@@ -74,6 +74,8 @@ export default {
               message: "登录成功",
               type: "success"
             });
+            const { token } = res.data;
+            localStorage.setItem('token', token);
             this.$router.push("/index")
           }).catch(
             err => {

@@ -10,7 +10,7 @@ Vue.use(VueRouter)
 const routes = [
   {
     path: '/',
-    redirect: '/register'
+    redirect: '/index'
   },
   {
     path: '/index',
@@ -38,5 +38,15 @@ const router = new VueRouter({
   base: process.env.BASE_URL,
   routes
 })
+
+router.beforeEach((to,from,next) => {
+  const isLogin = localStorage.getItem('token') ? true:false;
+  if(to.path == '/login' || to.path == '/register') {
+    next();
+  } else {
+    isLogin ? next() : next('/login');
+  }
+})
+
 
 export default router
