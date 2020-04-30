@@ -30,7 +30,7 @@
           </el-select>
         </el-form-item>
         <el-form-item>
-          <el-button type="primary" @click="submitForm('registerForm')">注册</el-button>
+          <el-button type="primary" class="register-btn" @click="submitForm('registerForm')">注册</el-button>
           <el-button @click="resetForm('registerForm')">重置</el-button>
         </el-form-item>
         <el-form-item align="right">
@@ -165,6 +165,14 @@ export default {
     /deep/ .el-form-item{
       &:last-child{
         margin-bottom: 0;
+      }
+      .el-select {
+        width: 100%;
+      }
+      .register-btn {
+        background: #8194d8;
+        border: 1px solid #8194d8;
+        color: #fff;
       }
     } 
   }

@@ -7,7 +7,7 @@
         :rules="rules"
         ref="loginForm"
         status-icon
-        label-width="80px"
+        label-width="50px"
         class="ruleForm"
         size="small"
       >
@@ -18,8 +18,8 @@
           <el-input type="password" v-model="ruleForm.pass" autocomplete="off"></el-input>
         </el-form-item>
         <el-form-item>
-          <el-button type="success" @click="submitForm('loginForm')">登录</el-button>
-          <el-button @click="resetForm('loginForm')">重置</el-button>
+          <el-button class="login-btn" @click="submitForm('loginForm')" style="width:100%">登录</el-button>
+          <!-- <el-button @click="resetForm('loginForm')">重置</el-button> -->
         </el-form-item>
         <el-form-item align="right">
           <span>还没有账号？现在
@@ -82,7 +82,7 @@ export default {
             const decoded = jwt_decode(token); //从token中解析的用户信息
             this.$store.dispatch('setAuth', !isEmpty(decoded));
             this.$store.dispatch('setUser', decoded);
-            this.$router.push("/index");
+            this.$router.push("/layout");
           }).catch(
             err => {
               this.$message({
@@ -129,6 +129,11 @@ export default {
     /deep/ .el-form-item{
       &:last-child{
         margin-bottom: 0;
+      }
+      .login-btn {
+        background: #8194d8;
+        border: 1px solid #8194d8;
+        color: #fff;
       }
     } 
   }
