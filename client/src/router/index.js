@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Index from '@/views/Index'
+import Layout from '@/views/Layout'
 import Register from '@/views/Register'
 import NotFound from '@/views/404'
 import Login from '@/views/Login'
@@ -13,9 +13,9 @@ const routes = [
     redirect: '/index'
   },
   {
-    path: '/index',
-    name: 'index',
-    component: Index
+    path: '/layout',
+    name: 'layout',
+    component: Layout
   },
   {
     path: '/login',

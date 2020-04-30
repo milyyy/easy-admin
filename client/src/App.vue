@@ -1,6 +1,5 @@
 <template>
   <div id="app">
-    {{ $store.state.user.a}}
     <router-view/>
   </div>
 </template>
