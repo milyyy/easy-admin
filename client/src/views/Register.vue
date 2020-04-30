@@ -33,6 +33,11 @@
           <el-button type="primary" @click="submitForm('registerForm')">注册</el-button>
           <el-button @click="resetForm('registerForm')">重置</el-button>
         </el-form-item>
+        <el-form-item align="right">
+          <span>已有账号，马上
+            <router-link to="/login">登录</router-link>
+          </span>
+        </el-form-item>
       </el-form>
     </div>
   </div>
@@ -117,9 +122,9 @@ export default {
           }).catch(
             err => {
               this.$message({
-              message: err,
-              type: "warning"
-            });
+                message: err,
+                type: "warning"
+              });
             }
           )
         } else {
@@ -157,6 +162,11 @@ export default {
     background: #fff;
     padding: 20px;
     border-radius: 10px;
+    /deep/ .el-form-item{
+      &:last-child{
+        margin-bottom: 0;
+      }
+    } 
   }
 }
 </style>

@@ -3,17 +3,24 @@ import VueRouter from 'vue-router'
 import Index from '@/views/Index'
 import Register from '@/views/Register'
 import NotFound from '@/views/404'
+import Login from '@/views/Login'
+
 Vue.use(VueRouter)
 
 const routes = [
   {
     path: '/',
-    redirect: '/index'
+    redirect: '/register'
   },
   {
     path: '/index',
     name: 'index',
     component: Index
+  },
+  {
+    path: '/login',
+    name: 'login',
+    component: Login
   },
   {
     path: '/register',
