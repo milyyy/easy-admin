@@ -32,6 +32,8 @@
 </template>
 
 <script>
+import jwt_decode from "jwt-decode"
+import { isEmpty } from 'utils/commen.js'
 export default {
   name: 'register',
   data() {
@@ -51,7 +53,6 @@ export default {
     };
     return {
       ruleForm: {
-        name: "",
         email: "",
         pass: "",
       },
@@ -74,9 +75,14 @@ export default {
               message: "登录成功",
               type: "success"
             });
+            // token本地存储，并在请求头响应头中处理
             const { token } = res.data;
             localStorage.setItem('token', token);
-            this.$router.push("/index")
+            // 解析token并存储到vuex中
+            const decoded = jwt_decode(token); //从token中解析的用户信息
+            this.$store.dispatch('setAuth', !isEmpty(decoded));
+            this.$store.dispatch('setUser', decoded);
+            this.$router.push("/index");
           }).catch(
             err => {
               this.$message({
