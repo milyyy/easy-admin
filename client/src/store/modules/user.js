@@ -3,6 +3,7 @@ import { set } from "mongoose";
 
 const user = {
   state: {
+    a: 1,
     isAuth: false, // 是否认证
     user: {}
   },
