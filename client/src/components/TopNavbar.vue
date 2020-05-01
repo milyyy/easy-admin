@@ -29,7 +29,7 @@
 </template>
 
 <script>
-import { mapState, mapGetters } from "vuex";
+// import { mapState, mapGetters } from "vuex";
 export default {
   computed: {
     // 这里的user为子模块为user的状态
@@ -50,7 +50,7 @@ export default {
       }
     },
     getInfo() { // 个人信息
-
+      this.$router.push('/profile')
     },
     logout() {  // 退出
       this.$store.dispatch('logout')
@@ -65,9 +65,6 @@ export default {
   height: 60px;
   width: 100%;
   background: #8194d8;
-  position: fixed;
-  left: 0;
-  right: 0;
   .content {
     display: flex;
     justify-content: space-between;

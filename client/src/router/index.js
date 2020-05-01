@@ -4,6 +4,9 @@ import Layout from '@/views/Layout'
 import Register from '@/views/Register'
 import NotFound from '@/views/404'
 import Login from '@/views/Login'
+import Home from '@/views/Home'
+import Profile from '@/views/Profile'
+
 
 Vue.use(VueRouter)
 
@@ -15,7 +18,12 @@ const routes = [
   {
     path: '/layout',
     name: 'layout',
-    component: Layout
+    component: Layout,
+    children: [
+      {path: "", component: Home},
+      {path: "/home", name: 'home', component: Home},
+      {path: "/profile", name: 'profile', component: Profile},
+    ]
   },
   {
     path: '/login',
