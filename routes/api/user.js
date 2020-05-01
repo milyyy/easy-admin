@@ -63,6 +63,7 @@ router.post("/login", (req, res) => {
         // jwt.sign("规则","加密名字","过期时间","箭头函数")
         const rule = {
           id:user.id,
+          name: user.name,
           email:user.email,
           avatar:user.avatar,
           identity:user.identity

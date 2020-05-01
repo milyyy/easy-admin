@@ -34,6 +34,12 @@ const user = {
     setUser({commit}, user) {
       commit(SET_USER, user)
     },
+    logout({commit}) {
+      // 注销：取消认证状态，清空用户信息
+      commit(SET_AUTH, false)
+      commit(SET_USER, null)
+      localStorage.removeItem('token')
+    }
   },
 }
 
