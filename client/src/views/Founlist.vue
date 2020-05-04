@@ -69,7 +69,7 @@ export default {
     getProfile() {
       this.$axios.get('/api/profile').then(res => {
         this.tableData = res.data
-        console.log(this.tableData);
+        // console.log(this.tableData);
       })
     },
     add() {
