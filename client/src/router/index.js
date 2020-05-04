@@ -5,8 +5,8 @@ import Register from '@/views/Register'
 import NotFound from '@/views/404'
 import Login from '@/views/Login'
 import Home from '@/views/Home'
-import Profile from '@/views/Profile'
 
+import asyncRoutes from './asyncRoutes'
 
 Vue.use(VueRouter)
 
@@ -22,7 +22,6 @@ const routes = [
     children: [
       {path: "", component: Home},
       {path: "/home", name: 'home', component: Home},
-      {path: "/profile", name: 'profile', component: Profile},
     ]
   },
   {
@@ -38,7 +37,8 @@ const routes = [
   {
     path: '*',
     component: NotFound
-  }
+  },
+  ...asyncRoutes
 ]
 
 const router = new VueRouter({

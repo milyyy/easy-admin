@@ -2,7 +2,7 @@
   <div class="layout">
     <TopNavbar></TopNavbar>
     <div class="container">
-      <SliderBar></SliderBar>
+      <SiderBar></SiderBar>
       <router-view></router-view>
     </div>
   </div>
@@ -10,12 +10,12 @@
 
 <script>
 import TopNavbar from "components/TopNavbar"
-import SliderBar from "components/SliderBar"
+import SiderBar from "components/SiderBar"
 export default {
   name: 'layout',
   components: {
     TopNavbar,
-    SliderBar
+    SiderBar
   }
 }
 </script>
