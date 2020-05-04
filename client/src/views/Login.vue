@@ -53,8 +53,8 @@ export default {
     };
     return {
       ruleForm: {
-        email: "",
-        pass: "",
+        email: "a@qq.com",
+        pass: "1111",
       },
       rules: {
         email: [

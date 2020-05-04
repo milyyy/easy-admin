@@ -15,10 +15,12 @@ function closeLoading() {
   loading.close();
 }
 
+axios.defaults.timeout = 5000;
+
 axios.interceptors.request.use(config => {
   startLoading();
   if (localStorage.getItem('token')) {
-    config.headers.Authrization = localStorage.getItem('token')
+    config.headers.Authorization = localStorage.getItem('token')
   }
   return config;
 }, err => {
@@ -31,15 +33,31 @@ axios.interceptors.response.use(res => {
   return res;
 }, err => {
   closeLoading();
-  Message.error(err.response.data);
+  // Message.error(err.response.data);
   // token 过期处理
-  const { status } = err.response;
-  if(status == '401') {
-    Message.error('token过期，请重新登录！');
-    router.push("/login");
-    localStorage.removeItem('token');
+  let status  = err && err.response;
+  switch (status) {
+    case 400:
+      Message.error('请求错误！');
+      break;
+    case 401:
+      Message.error('token过期，请重新登录！');
+      router.push("/login");
+      localStorage.removeItem('token');
+      break;
+    case 404:
+      Message.error('请求错误，未找到该资源');
+      break;
+    case 405:
+      Message.error('请求方法未允许');
+      break;
+    case 408:
+      Message.error('请求超时');
+      break;
+    default:
+      Message.error(err.response.status);
   }
-
+    
   return Promise.reject(err);
 })
 
