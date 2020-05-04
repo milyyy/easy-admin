@@ -6,15 +6,10 @@
       background-color="#97a7df"
       text-color="#333"
       active-text-color="#fff">
-      <!-- 一层 -->
-      <router-link to="/home">
-        <el-menu-item index="0">
-          <i class="el-icon-menu"></i>
-          <span>首页</span>
-        </el-menu-item>
-      </router-link>
       <!-- 多层级 -->
       <template v-for="item in items">
+
+        <!-- 有子级 -->
         <el-submenu v-if="item.children" :index="item.path" :key="item.path">
           <!-- 外层 -->
           <template slot="title">
@@ -28,6 +23,15 @@
             </el-menu-item>
           </router-link>
         </el-submenu>
+
+        <!-- 无子级 -->
+        <router-link :to="item.path" v-else>
+          <el-menu-item :index="item.path">
+            <i class="el-icon-menu"></i>
+            <span>{{item.name}}</span>
+          </el-menu-item>
+        </router-link>
+
       </template>
     </el-menu>
   </div>
@@ -39,6 +43,11 @@ export default {
   data(){
     return {
       items: [
+        { 
+          icon: 'el-icon-s-data',
+          name: '首页',
+          path: 'home',
+        },
         { 
           icon: 'el-icon-s-data',
           name: '资金管理',
@@ -60,6 +69,11 @@ export default {
               name: '个人信息'
             }
           ]
+        },
+        { 
+          icon: 'el-icon-s-data',
+          name: '404',
+          path: 'not-found',
         },
       ]
     }
