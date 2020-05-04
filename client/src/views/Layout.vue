@@ -3,7 +3,9 @@
     <TopNavbar></TopNavbar>
     <div class="container">
       <SiderBar></SiderBar>
-      <router-view></router-view>
+      <div class="view">
+        <router-view></router-view>
+      </div>
     </div>
   </div>
 </template>
@@ -29,6 +31,13 @@ export default {
       display: flex;
       width: 100%;
       min-height: calc(100% - 60px);
+      .view {
+        // flex: 1;
+        // width: 100%;
+        width: calc(100% - 240px);
+        padding: 20px;
+        box-sizing: border-box;
+      }
     }
   }
 </style>

@@ -50,7 +50,7 @@ export default {
         },
         { 
           icon: 'el-icon-s-data',
-          name: '资金管理',
+          name: '时间管理',
           path: 'fund',
           children: [
             {
