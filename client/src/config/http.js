@@ -51,11 +51,8 @@ axios.interceptors.response.use(res => {
     case 405:
       Message.error('请求方法未允许');
       break;
-    case 408:
-      Message.error('请求超时');
-      break;
     default:
-      Message.error(err.response.status);
+      Message.error('请求超时');
   }
     
   return Promise.reject(err);

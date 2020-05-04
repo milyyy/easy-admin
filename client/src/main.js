@@ -10,7 +10,7 @@ import 'element-ui/lib/theme-chalk/index.css'
 import 'assets/style/reset.css'
 import 'assets/style/main.css'
 
-Vue.use(ElementUI)
+Vue.use(ElementUI, {size: 'small'})
 Vue.prototype.$axios = axios;
 
 Vue.config.productionTip = false
