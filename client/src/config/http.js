@@ -35,7 +35,7 @@ axios.interceptors.response.use(res => {
   closeLoading();
   // Message.error(err.response.data);
   // token 过期处理
-  let status  = err && err.response;
+  let status  = err && err.response.status;
   switch (status) {
     case 400:
       Message.error('请求错误！');
@@ -51,8 +51,11 @@ axios.interceptors.response.use(res => {
     case 405:
       Message.error('请求方法未允许');
       break;
-    default:
+    case 408:
       Message.error('请求超时');
+      break;
+    default:
+      Message.error(`连接失败${err.response.status}`);
   }
     
   return Promise.reject(err);
