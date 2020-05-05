@@ -43,19 +43,13 @@ export default {
   props: {
     dialog: {
       type: Object
+    },
+    formData: {
+      type: Object
     }
   },
   data(){
     return {
-      formData: {
-        type: "",
-        desc: "",
-        income: "",
-        expend: "",
-        cash: "",
-        remark: "",
-        id: ""
-      },
       type_list: ['日用', '娱乐', '运动'],
       formRule: {
         type: [
@@ -77,10 +71,14 @@ export default {
     submitForm(form) {
       this.$refs[form].validate(valid => {
         if(valid) {
-          this.$axios.post("/api/profile/add", this.formData).then(res => {
+          // 区分添加和编辑
+          const url = this.dialog.option == 'add'?'add':`edit/${this.formData.id}`;
+          const msg = this.dialog.option == 'add'?'添加':'编辑';
+
+          this.$axios.post(`/api/profile/${url}`, this.formData).then(res => {
             this.dialog.show = false;
             this.$message({
-              message: "添加成功",
+              message: `${msg}成功`,
               type: "success"
             })
             this.$emit('update');

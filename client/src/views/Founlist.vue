@@ -46,7 +46,7 @@
       </el-table-column>
     </el-table>
 
-    <Dialog :dialog="dialog" @update="getProfile"></Dialog>
+    <Dialog :dialog="dialog" :formData="formData" @update="getProfile"></Dialog>
   </div>
 </template>
 
@@ -62,7 +62,17 @@ export default {
     return {
       dialog: {
         show: false,
-        title: "添加信息"
+        title: "添加信息",
+        option: 'edit'
+      },
+      formData: {
+        type: "",
+        desc: "",
+        income: "",
+        expend: "",
+        cash: "",
+        remark: "",
+        id: ""
       },
       tableData: []
     }
@@ -78,10 +88,41 @@ export default {
       })
     },
     add() {
-      this.dialog.show = true
+      this.dialog = {
+        show: true,
+        title: "添加信息",
+        option: 'add'
+      };
+      this.formData = {
+        type: "",
+        desc: "",
+        income: "",
+        expend: "",
+        cash: "",
+        remark: "",
+        id: ""
+      };
     },
-    del() {},
-    edit() {}
+    edit(index, row) {
+      console.log(index,row);
+      this.dialog = {
+        show: true,
+        title: "编辑信息",
+        option: 'edit'
+      };
+      this.formData = {
+        type: row.type,
+        desc: row.desc,
+        income: row.income,
+        expend: row.expend,
+        cash: row.cash,
+        remark: row.remark,
+        id: row._id
+      };
+    },
+    del(index, row) {
+      
+    },
   },
 }
 </script>
