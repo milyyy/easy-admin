@@ -33,7 +33,7 @@
 
 <script>
 import jwt_decode from "jwt-decode"
-import { isEmpty } from 'utils/commen.js'
+
 export default {
   name: 'register',
   data() {
@@ -80,7 +80,7 @@ export default {
             localStorage.setItem('token', token);
             // 解析token并存储到vuex中
             const decoded = jwt_decode(token); //从token中解析的用户信息
-            this.$store.dispatch('setAuth', !isEmpty(decoded));
+            this.$store.dispatch('setAuth', !this.$fn.isEmpty(decoded));
             this.$store.dispatch('setUser', decoded);
             this.$router.push("/layout");
           }).catch(

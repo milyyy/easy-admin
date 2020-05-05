@@ -35,7 +35,7 @@ axios.interceptors.response.use(res => {
   closeLoading();
   // Message.error(err.response.data);
   // token 过期处理
-  let status  = err && err.response.status;
+  let status  = err.response && err.response.status;
   switch (status) {
     case 400:
       Message.error('请求错误！');

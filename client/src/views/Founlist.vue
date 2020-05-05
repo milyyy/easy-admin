@@ -31,7 +31,11 @@
         </template>
       </el-table-column>
       <el-table-column prop="remark" label="备注"></el-table-column>
-      <el-table-column prop="data" label="创建时间"></el-table-column>
+      <el-table-column label="创建时间">
+        <template slot-scope="scope">
+          {{$fn.formatTime(scope.row.data)}}
+        </template>
+      </el-table-column>
       <el-table-column label="操作" fixed="right">
         <template slot-scope="scope">
           <el-button-group>
@@ -48,6 +52,7 @@
 
 <script>
 import Dialog from "components/Dialog"
+
 export default {
   name: 'fundlist',
   components: {
