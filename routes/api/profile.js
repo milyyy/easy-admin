@@ -90,7 +90,8 @@ router.post("/edit/:id", passport.authenticate('jwt', {session: false}), (req, r
 router.delete("/delete/:id", passport.authenticate('jwt', {session: false}), (req, res) => {
   Profile.findOneAndDelete({_id: req.params.id})
     .then( info => {
-      Profile.save().then(info => res.status(200).json(info))
+      // Profile.save(info);
+      res.status(200).json(info);
     })
     .catch(err => res.status(400).json(err))
 })

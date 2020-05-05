@@ -47,16 +47,18 @@
     </el-table>
 
     <Dialog :dialog="dialog" :formData="formData" @update="getProfile"></Dialog>
+    <Confirm :info="info"></Confirm>
   </div>
 </template>
 
 <script>
 import Dialog from "components/Dialog"
-
+import Confirm from "components/Confirm"
 export default {
   name: 'fundlist',
   components: {
-    Dialog
+    Dialog,
+    Confirm
   },
   data() {
     return {
@@ -104,7 +106,6 @@ export default {
       };
     },
     edit(index, row) {
-      console.log(index,row);
       this.dialog = {
         show: true,
         title: "编辑信息",
@@ -121,7 +122,15 @@ export default {
       };
     },
     del(index, row) {
-      
+      this.$axios.delete(`/api/profile/delete/${row._id}`).then(res => {
+        if(res.status == 200) {
+          this.$message({
+            message: "删除成功",
+            type:"success"
+          })
+          this.getProfile();
+        }
+      })
     },
   },
 }
