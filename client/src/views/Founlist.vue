@@ -40,14 +40,15 @@
         <template slot-scope="scope">
           <el-button-group>
             <el-button type="primary" icon="el-icon-edit" @click="edit(scope.$index, scope.row)"></el-button>
-            <el-button type="danger" icon="el-icon-delete" @click="del(scope.$index, scope.row)"></el-button>
+            <!-- <el-button type="danger" icon="el-icon-delete" @click="del(scope.$index, scope.row)"></el-button> -->
+            <el-button type="danger" icon="el-icon-delete" @click="openDel(scope.$index, scope.row)"></el-button>
           </el-button-group>
         </template>
       </el-table-column>
     </el-table>
 
     <Dialog :dialog="dialog" :formData="formData" @update="getProfile"></Dialog>
-    <Confirm :info="info"></Confirm>
+    <Confirm :info="info" @submit="delRow"></Confirm>
   </div>
 </template>
 
@@ -66,6 +67,15 @@ export default {
         show: false,
         title: "添加信息",
         option: 'edit'
+      },
+      info: {
+        show: false,
+        title: '提示',
+        width: '30%',
+        content: "确定删除吗？",
+        cancel: "取消",
+        submit: "确定",
+        id: "" // 便于后续传递
       },
       formData: {
         type: "",
@@ -121,17 +131,22 @@ export default {
         id: row._id
       };
     },
-    del(index, row) {
-      this.$axios.delete(`/api/profile/delete/${row._id}`).then(res => {
+    openDel(index, row) {
+      this.info.show = true
+      this.info.id = row._id;
+    },
+    delRow(id){
+      this.$axios.delete(`/api/profile/delete/${id}`).then(res => {
         if(res.status == 200) {
           this.$message({
             message: "删除成功",
             type:"success"
           })
+          this.info.show = false;
           this.getProfile();
         }
       })
-    },
+    }
   },
 }
 </script>

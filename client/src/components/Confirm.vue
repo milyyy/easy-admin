@@ -1,10 +1,16 @@
 <template>
   <div class="confirm">
-    <el-dialog title="提示" :visible.sync="info.visible" width="30%">
-      <span>这是一段信息</span>
+    <el-dialog
+      :title="info.title"
+      :visible.sync="info.show"
+      :close-on-click-modal="false"
+      :modal-append-to-body="false"
+      :width="info.width"
+    >
+      <span>{{info.content}}</span>
       <span slot="footer" class="dialog-footer">
-        <el-button @click="dialogVisible = false">取 消</el-button>
-        <el-button type="primary" @click="dialogVisible = false">确 定</el-button>
+        <el-button @click="info.show = false">{{info.cancel}}</el-button>
+        <el-button type="primary" @click="$emit('submit', info.id)">{{info.submit}}</el-button>
       </span>
     </el-dialog>
   </div>
@@ -15,24 +21,24 @@ export default {
   name: 'confirm',
   props: {
     info: {
-      type: Object,
-      default: {
-        visible: false,
-        title: '',
-        width: '30%',
-        content: "",
-        cancel: "取消",
-        submit: "确定"
-      }
+      type: Object
     },
-  },
-  data() {
-    return {
-      visible: false
-    }
   }
 }
 </script>
 <style lang="scss" scoped>
-  
+.confirm /deep/ {
+  .el-dialog {
+    width: 40%;
+    .el-dialog__header {
+      padding: 10px 20px 10px;
+    }
+    .el-dialog__body {
+      padding: 10px 20px;
+    }
+    .el-dialog__footer {
+      padding: 10px 20px;
+    }
+  }
+}
 </style>
