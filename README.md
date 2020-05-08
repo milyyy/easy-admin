@@ -21,6 +21,7 @@ node.js+vue全家桶搭建一个前后端连载的极简后台
 
 目录：
 ```
+├─client              // 服务端
 ├─config
     └─keys.js         // 数据库地址 
     └─passport.js     // token 验证
